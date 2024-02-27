@@ -1,0 +1,578 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url(./font/Pretendard-Regular.woff);
+    weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url(./font/Pretendard-Bold.woff);
+    weight: 700;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Pretendard';
+}
+
+body {
+    overflow-x: hidden;
+}
+
+nav {   
+    transition: all 0.5s;
+}
+
+#scroll-section-2 {
+    cursor: none;
+    background-color: black;
+}
+
+#scroll-section-3 .content {
+    opacity: 0;
+}
+#scroll-section-4 {
+    background-color: #CCDDFF;
+}
+#scroll-section-4 .prev-button {
+    position: absolute;
+    left : 10vw;
+    transform: translateY(-50%);
+    top: 50%;
+    z-index: 1000;
+    background-color: transparent;
+    border: none;
+}
+#scroll-section-4 .prev-button svg{
+    width: 3rem;    
+    height: 3rem;    
+}
+#scroll-section-4 .prev-button svg.hide{
+    display: none;
+}
+
+#scroll-section-4 .next-button {
+    position: absolute;
+    right : 10vw;
+    transform: translateY(-50%);
+    top: 50%;
+    z-index: 1000;
+    background-color: transparent;
+    border: none;
+}
+#scroll-section-4 .next-button svg{
+    width: 3rem;
+    height: 3rem;    
+}
+#scroll-section-4 .content{
+    transition: all 1.0s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.calendar{
+    width: 75vw;
+    transition: all 1.0s;
+}
+.calendar.show{
+    opacity: 1;
+    transform: scale(1);
+}
+.calendar.hide{
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+.calendar-header .calendar-header-title{
+    font-size: 2rem;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.calendar-week-day{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.calendar-week-day .day{
+    width: calc(100% / 7);
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+}
+.calendar-days{
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.calendar-days .week{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: rgb(216, 216, 216) 1px solid;
+}
+.calendar-days .week:last-child{
+    border-bottom: none;
+}
+.calendar-days .date{
+    height: 11vh;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+    border-right: rgb(216, 216, 216) 1px solid;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+.calendar-days .date .date-reservation-list{
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.calendar-days .date .date-reservation-list .date-reservation-info{
+    width: 100%;
+    height: 1.5rem;
+    overflow: hidden;
+}
+.calendar-days .date:last-child{
+    border-right: none;
+}
+.calendar-days .date:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.calendar-days .date.today{
+    background-color: rgba(255, 235, 205,0.5)
+}
+
+.card-default-setting {
+    opacity: 0;
+    transition: all 1.0s;
+}
+
+#reservationModal .time-table {
+    width: 100%;
+}
+#reservationModal .times-area {
+    padding-right: 0;
+    transform: translateY(-0.75rem);
+}
+#reservationModal .time {
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+
+#reservationModal .reservation-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-left: 0;
+}
+
+#reservationModal .reservation-area .reservation {
+    height: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    width: 100%;
+}
+#reservationModal .reservation-area .reservation-division {
+    height: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: #f8f9fa;
+    width: 100%;
+}
+#reservationModal .reservation-area .reservation.reserved,
+#reservationModal .reservation-area .reservation-division.reserved {
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: rgba(0, 0, 255, 0.3);
+    width: 100%;
+    border: 0;
+    cursor: pointer;
+}
+
+#reservationModal .reservation-area .reservation-division.selected{
+    height: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: rgba(255, 230, 0, 0.3);
+}
+.selected{
+    background-color: rgba(255, 230, 0, 0.3);
+}
+
+.animation-fadeIn-down {
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-fadeOut-down {
+    animation-name: fadeOutDown;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-fadeIn-down-bounce {
+    animation-name: fadeInDownBounce;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-fadeOut-down-bounce {
+    animation-name: fadeOutDownBounce;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-fadeIn-noMove {
+    animation-name: fadeInNoMove;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.animation-fadeOut-noMove {
+    animation-name: fadeOutNoMove;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+/* 현재(2024/01/24) 애니메이션 미사용으로 주석처리함 */
+/* #scroll-section-1 .content,
+#scroll-section-2 .content{
+    opacity: 0;
+} */
+
+/* content section 관련 style */
+
+section[id*=scroll-section][data-contentSectionId] .content-list {
+    transition: all 1.0s;
+}
+
+section[id*=scroll-section][data-contentSectionId] .content-area h2 {
+    opacity: 0;
+    transition: all 1.0s;
+    cursor: pointer;
+}
+
+/* row안에 있는 컨텐츠 안보이게 하기 */
+section[id*=scroll-section][data-contentSectionId] .content-area h2 + .content-list {
+    overflow: hidden;
+}
+section[id*=scroll-section][data-contentSectionId] .content-area h2.show + .content-list {
+    /* animation: slide-down 1s forwards; */
+    height: auto;
+    overflow: visible;
+}
+
+/* h2가 show 클래스가 추가되면 row 안에 있는 컨텐츠 보이게 하기*/
+section[id*=scroll-section][data-contentSectionId] .content-area h2 svg {
+    top: 50%;
+    left : 98%;
+    transform: translate(-50%,-50%);
+    transition: all 0.5s;
+}
+
+section[id*=scroll-section][data-contentSectionId] .content-area h2.show svg {
+    transform:  translate(-50%,-50%) rotate(-180deg);
+
+}
+
+/* scroll-section-2 마우스 관련 style*/
+.mouse-cursor{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    fill: white;
+    z-index: 9999;
+    pointer-events: none;
+    cursor: none;
+    /* transition: all 0.5s; */
+    transform: translate(-50%, -50%);
+    /* mix-blend-mode: difference; */
+    opacity: 0;
+    display: none;
+}
+
+.volume-control{
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    cursor: pointer;
+    fill: white;
+}
+
+.hover{
+    opacity: 1;
+    display: block;
+}
+
+
+/* 모달 관련 style */
+.modal {
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: all 0.5s;
+}
+
+#reservationModal .modal-content{
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+
+/* 카드 hover했을 때 카드 전체가 hover 되기 위해 아래와 같은 설정 필요 */
+.card {
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card:hover img {
+    transform: scale(1);
+    cursor: pointer;
+}
+
+.card:hover .card-body {
+    transform: scale(1);
+    cursor: pointer;
+}
+
+.scrollDownArea{
+    z-index: 10;
+    height: 49.5px;
+    bottom: 5rem;
+}
+
+.scrollDown{
+    position: relative;
+    z-index: 20;
+    cursor: pointer;
+    fill: white;
+    transition: all 0.5s;
+    animation: moveUpDown 2s infinite alternate;
+    animation-timing-function: ease-in-out;
+}
+
+.scrollDown-section-2{
+    position: absolute;
+    bottom: 2rem;
+    left:calc(50% - 12.5px);
+    z-index: 20;
+    cursor: pointer;
+    fill: white;
+    transition: all 0.5s;
+    animation: moveUpDown 2s infinite alternate;
+    animation-timing-function: ease-in-out;
+}
+
+/* 컨텐츠 section 네비게이터 style */
+.contentListNavigator{
+    position: fixed;
+    bottom: 50%;
+    right: 5%;
+    transform: translateY(50%);
+    z-index: 1000;
+}
+.contentListNavigator .list-group{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.contentListNavigator .list-group-item-action{
+    max-width: 9rem;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid white;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s, border 0.5s, color 0.5s;
+}
+.contentListNavigator .list-group-item-action:hover{
+
+    background-color: rgba(211, 211, 211, 1);
+    border: 1px solid rgba(211, 211, 211, 1);
+    color: black;
+    cursor: pointer;
+}
+/* 네이게이터 전용 : 클릭 시 실행*/
+.contentListNavigator .list-group-item-action.active{
+    background-color: rgba(211, 211, 211, 1);
+    border: 1px solid rgba(211, 211, 211, 1);
+    color: black;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translate(3vw, 0);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translate(-0.5vw, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes fadeOutRight {
+    from {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(3vw, 0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate(-3vw, 0);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translate(0.5vw, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes fadeOutLeft {
+    from {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-3vw, 0);
+    }
+}
+
+@keyframes fadeInDownBounce {
+    from {
+        opacity: 0;
+        transform: translate(0, 3vh);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translate(0, -0.5vh);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes fadeOutDownBounce {
+    from {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(0, 3vh);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate(0, 1.5vh);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(0, 1.5vh);
+    }
+}
+
+
+@keyframes fadeInNoMove {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutNoMove {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes moveUpDown {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-1vh);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
